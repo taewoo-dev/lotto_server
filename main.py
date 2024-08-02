@@ -1,9 +1,9 @@
-from crawler.crawler import Crawler
+from crawlers.crawler import Crawler
 from models.lotto import SelectLottoDto
 from database.db import DBManger
 
 
-def get_lotto_round(lotto_id: int) -> SelectLottoDto:
+def __get_lotto_round(lotto_id: int) -> SelectLottoDto:
     """
     특정 회차의 로또 정보를 가져오는 함수
     :return: SelectLottoDto
@@ -25,7 +25,7 @@ def compare_lotto_numbers():
 
     lotto_id = int(input("회차를 입력").strip())
 
-    select_lotto_dto = get_lotto_round(lotto_id=lotto_id)
+    select_lotto_dto = __get_lotto_round(lotto_id=lotto_id)
 
     lotto_numbers = select_lotto_dto.lotto_numbers.split(",")
     lotto_bonus = select_lotto_dto.lotto_bonus
@@ -42,6 +42,10 @@ def compare_lotto_numbers():
         if user_lotto_number == lotto_bonus:
             bonus = True
 
+    __check_lotto_winning_numbers(bonus, correct_count, select_lotto_dto)
+
+
+def __check_lotto_winning_numbers(bonus, correct_count, select_lotto_dto):
     if correct_count == 6:
         print(f"축하합니다! 1등 당첨되었습니다 당첨금액은 {select_lotto_dto.lotto_first}입니다")
     elif correct_count == 5 and bonus:
@@ -54,8 +58,6 @@ def compare_lotto_numbers():
         print(f"축하합니다! 5등 당첨되었습니다 당첨금액은 {select_lotto_dto.lotto_second}입니다")
     else:
         print("아쉽지만 다음기회에")
-
-
 
 
 if __name__ == "__main__":
