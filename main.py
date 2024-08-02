@@ -1,8 +1,16 @@
 from crawler.crawler import Crawler
+from models.lotto import SelectLottoDto
+from database.db import DBManger
 
 
 def get_lotto_round(lotto_id: int):
     lotto_id = int(input("회차를 입력").strip())
+    sql = """
+    select lotto_numbers, lotto_bonus, lotto_first, lotto_second, lotto_third, lotto_4th, lotto_5th 
+    from lottos where lotto_id = %s;
+    """
+    result = DBManger.excute_query(sql, 1129)
+
 
 
 def compare_lotto_numbers(lotto_number: list[str], lotto_amounts: list[str]):
@@ -24,14 +32,12 @@ def compare_lotto_numbers(lotto_number: list[str], lotto_amounts: list[str]):
     else:
         print("0원")
 
-# (3). 데이터베이스 연동
 # (4). 로또 규칙 구체화
+# (5). 보너스 점수
 
 
 if __name__ == "__main__":
-    app = Crawler()
-    app.crawling_lottos()
+    # app = Crawler()
+    # app.crawling_lottos()
 
-    for lotto in app.lotto_list:
-        print(lotto)
-        compare_lotto_numbers(lotto_number=lotto.lotto_numbers, lotto_amounts=lotto.lotto_amounts)
+
