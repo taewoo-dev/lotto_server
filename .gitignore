@@ -378,4 +378,5 @@ pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,django
 
-/database.config.py
+# Ignore config.py
+database/config.py

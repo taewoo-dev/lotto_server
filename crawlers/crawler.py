@@ -27,7 +27,7 @@ class Crawler:
 
         # (1). 회차 선택
 
-        for input_id in range(601,1131):
+        for input_id in range(1,1301):
 
             select = Select(self._browser.find_element(By.ID, "hdrwComb"))
             select2 = Select(self._browser.find_element(By.ID, "dwrNoList"))
